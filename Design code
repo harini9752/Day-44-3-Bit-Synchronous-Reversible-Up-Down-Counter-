@@ -1,0 +1,20 @@
+module three_bit_reversible_up_down_counter (
+  input wire clk,
+  input wire rst_n, // Active-low asynchronous reset
+  input wire up_down, // Up: 1, Down: 0
+  output reg [2:0] count
+);
+
+  always @(posedge clk or negedge rst_n) begin
+    if (~rst_n) begin
+      count <= 3'b000;
+    end else if (up_down) begin
+      // Upward counting
+      count <= count + 1;
+    end else begin
+      // Downward counting
+      count <= count - 1;
+    end
+  end
+
+endmodule
